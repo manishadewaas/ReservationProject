@@ -13,6 +13,7 @@ namespace ReservationSystem
 {
     public partial class Admin : MetroForm
     {
+        DbConnection db = new DbConnection();
         public Admin()
         {
             InitializeComponent();
