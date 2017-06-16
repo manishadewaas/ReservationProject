@@ -9,91 +9,89 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
 namespace ReservationSystem
 {
-    public partial class adminDetails : MetroForm
+    public partial class Driver : MetroForm
     {
         public SqlConnection con;
         public SqlCommand cmd;
-        int id;
-
-        public adminDetails()
+        int did;
+        public Driver()
         {
             InitializeComponent();
         }
 
-        private void adminDetails_Load(object sender, EventArgs e)
+        private void Driver_Load(object sender, EventArgs e)
         {
             con = new SqlConnection();
             con.ConnectionString=
         }
 
-        private void btn_add_Click(object sender, EventArgs e)
+        private void btn_dadd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txt_id.Text) || txt_id.Text.Any(c => char.IsDigit(c)))
+            if (string.IsNullOrEmpty(txt_did.Text) || txt_did.Text.Any(c => char.IsDigit(c)))
             {
                 MessageBox.Show("please enter your id number");
             }
-            if (string.IsNullOrEmpty(txt_name.Text) || txt_name.Text.Any(c => char.IsNumber(c)))
+            if (string.IsNullOrEmpty(txt_dname.Text) || txt_dname.Text.Any(c => char.IsNumber(c)))
             {
                 MessageBox.Show("please enter your name only in characters");
             }
             try
             {
                 con.Open();
-                cmd = new SqlCommand("Insert into Admin values ('" + txt_id.Text + "','" + txt_name.Text + "','" + mtxt_tp + "')", con);
-                int line=cmd.ExecuteNonQuery();
+                cmd = new SqlCommand("Insert into Admin values ('" + txt_did.Text + "','" + txt_dname.Text + "','" + mtxt_dtp + "')", con);
+                int line = cmd.ExecuteNonQuery();
                 con.Dispose();
                 con.Close();
-             if(line==1)
+                if (line == 1)
                 {
                     MessageBox.Show("Data Inserted Successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
-             else
+                else
                 {
                     MessageBox.Show("Data not Inserted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
             }
-            catch(SqlException)
+            catch (SqlException)
             {
                 MessageBox.Show("database error");
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("errors");
             }
         }
-        private void dgv_admin_cellcontentclick(object sender,DataGridViewCellEventArgs e)
+
+        private void dgv_driver_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            txt_id.Text = dgv_admin.CurrentRow.Cells["admin_id"].Value.ToString();
-            txt_name.Text = dgv_admin.CurrentRow.Cells["admin_name"].Value.ToString();
-            mtxt_tp.Text = dgv_admin.CurrentRow.Cells["admin_tp"].Value.ToString();
+            txt_did.Text = dgv_driver.CurrentRow.Cells["driver_id"].Value.ToString();
+            txt_dname.Text = dgv_driver.CurrentRow.Cells["driver_name"].Value.ToString();
+            mtxt_dtp.Text = dgv_driver.CurrentRow.Cells["driver_tp"].Value.ToString();
 
         }
 
-        private void btn_update_Click(object sender, EventArgs e)
+        private void btn_dupdate_Click(object sender, EventArgs e)
         {
-            
-            if (string.IsNullOrEmpty(txt_name.Text) || txt_name.Text.Any(c => char.IsNumber(c)))
+            if (string.IsNullOrEmpty(txt_dname.Text) || txt_dname.Text.Any(c => char.IsNumber(c)))
             {
                 MessageBox.Show("please enter your name only in characters");
             }
             try
             {
-                DialogResult dr = MessageBox.Show("do you want to update ?","Information",MessageBoxButtons.YesNo,MessageBoxIcon.Information);
-                if(dr.ToString()=="yes")
+                DialogResult dr = MessageBox.Show("do you want to update ?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dr.ToString() == "yes")
                 {
-                    id = Convert.ToInt32(dgv_admin.CurrentRow.Cells[0].Value.ToString());
+                    did = Convert.ToInt32(dgv_driver.CurrentRow.Cells[0].Value.ToString());
                     con.Open();
-                    cmd = new SqlCommand("update Admin set admin_name='" + txt_name.Text + "',admin_tp='" + mtxt_tp + "' where admin_id='" + txt_id.Text + "'", con);
+                    cmd = new SqlCommand("update Admin set admin_name='" + txt_dname.Text + "',admin_tp='" + mtxt_dtp + "' where admin_id='" + txt_did.Text + "'", con);
                     int line = cmd.ExecuteNonQuery();
                     cmd.Dispose();
                     con.Close();
-                    if(line==0)
+                    if (line == 0)
                     {
                         MessageBox.Show("Data Updated Successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -103,44 +101,44 @@ namespace ReservationSystem
                     }
                 }
             }
-            catch(SqlException)
+            catch (SqlException)
             {
                 MessageBox.Show("Database Error");
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("Errors");
             }
         }
 
-        private void btn_display_Click(object sender, EventArgs e)
+        private void btn_ddisplay_Click(object sender, EventArgs e)
         {
             try
             {
                 con.Open();
-                SqlDataAdapter da = new SqlDataAdapter("select from Admin",con);
+                SqlDataAdapter da = new SqlDataAdapter("select from Admin", con);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                dgv_admin.DataSource = dt;
+                dgv_driver.DataSource = dt;
 
 
             }
-            catch(Exception)
+            catch (Exception)
             {
-                MessageBox.Show("Error","Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error", "Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void btn_delete_Click(object sender, EventArgs e)
+        private void btn_ddelete_Click(object sender, EventArgs e)
         {
             try
             {
                 DialogResult dr = MessageBox.Show("Do you want to delete the selected row?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if(dr.ToString()=="Yes")
+                if (dr.ToString() == "Yes")
                 {
-                    id = Convert.ToInt32(dgv_admin.CurrentRow.Cells[0].Value.ToString());
+                    did = Convert.ToInt32(dgv_driver.CurrentRow.Cells[0].Value.ToString());
                     con.Open();
-                    cmd = new SqlCommand("Delete from Admin where admin_id='" + txt_id.Text + "'");
+                    cmd = new SqlCommand("Delete from Admin where admin_id='" + txt_did.Text + "'");
                     int line = cmd.ExecuteNonQuery();
                     cmd.Dispose();
                     con.Close();
@@ -152,25 +150,24 @@ namespace ReservationSystem
                     {
                         MessageBox.Show("Data Not Deleted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
                 }
             }
+            
             catch(Exception)
             {
                 MessageBox.Show("Error", "Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+}
 
-        private void btn_clr_Click(object sender, EventArgs e)
+        private void btn_dclr_Click(object sender, EventArgs e)
         {
-            txt_id.Clear();
-            txt_name.Clear();
-            mtxt_tp.Clear();
+            txt_did.Clear();
+            txt_dname.Clear();
+            mtxt_dtp.Clear();
         }
 
-        private void btn_exit_Click(object sender, EventArgs e)
+        private void btn_dexit_Click(object sender, EventArgs e)
         {
 
         }
     }
-}
