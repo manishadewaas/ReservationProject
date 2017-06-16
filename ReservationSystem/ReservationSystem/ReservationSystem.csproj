@@ -61,11 +61,19 @@
     <Compile Include="Admin.Designer.cs">
       <DependentUpon>Admin.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+    <Compile Include="Bus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bus.Designer.cs">
+      <DependentUpon>Bus.cs</DependentUpon>
+=======
     <Compile Include="adminDetails.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="adminDetails.Designer.cs">
       <DependentUpon>adminDetails.cs</DependentUpon>
+>>>>>>> 5b87921e2379d6a9f9484268f1510a68c3fc72af
     </Compile>
     <Compile Include="Bus.cs">
       <SubType>Form</SubType>
@@ -77,11 +85,22 @@
     <Compile Include="metroForm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Welcome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Welcome.Designer.cs">
+      <DependentUpon>Welcome.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Admin.resx">
       <DependentUpon>Admin.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
+    <EmbeddedResource Include="Bus.resx">
+      <DependentUpon>Bus.cs</DependentUpon>
+=======
     <EmbeddedResource Include="adminDetails.resx">
       <DependentUpon>adminDetails.cs</DependentUpon>
+>>>>>>> 5b87921e2379d6a9f9484268f1510a68c3fc72af
     </EmbeddedResource>
     <EmbeddedResource Include="Bus.resx">
       <DependentUpon>Bus.cs</DependentUpon>
@@ -95,6 +114,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Welcome.resx">
+      <DependentUpon>Welcome.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
